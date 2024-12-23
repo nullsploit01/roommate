@@ -5,20 +5,20 @@
 void setup()
 {
   // initialize LED digital pin as an output.
-  pinMode(15, OUTPUT);
+  pinMode(D3, OUTPUT);
 }
 
 void loop()
 {
   // turn the LED on (HIGH is the voltage level)
-  digitalWrite(15, HIGH);
+  digitalWrite(D3, HIGH);
 
   // wait for a second
-  delay(5000);
+  delay(1000);
 
   // turn the LED off by making the voltage LOW
-  digitalWrite(15, LOW);
+  digitalWrite(D3, LOW);
 
    // wait for a second
-  delay(5000);
+  delay(500);
 }
