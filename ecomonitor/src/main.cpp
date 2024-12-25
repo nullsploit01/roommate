@@ -22,5 +22,5 @@ void loop()
     digitalWrite(D3, LOW);
   }
 
-  delay(50);
+  delay(1550);
 }
