@@ -1,6 +1,11 @@
 
-#include "Arduino.h"
-#include "DHT.h"
+#include <Arduino.h>
+#include <DHT.h>
+#include <ESP8266WiFi.h>
+
+// Include the library code
+#include <Configuration.h>
+#include <ConnectWifi.h>
 
 #define DHTPIN D2
 #define DHTTYPE DHT11
@@ -9,9 +14,11 @@ DHT dht(DHTPIN, DHTTYPE);
 
 void setup()
 {
+  Serial.begin(115200);
+  
+  connectWifi();
   pinMode(D3, OUTPUT);
 
-  Serial.begin(9600);
   dht.begin();
 }
 
@@ -32,7 +39,7 @@ void loop()
   // Compute heat index in Celsius (isFahreheit = false)
   float hic = dht.computeHeatIndex(t, h, false);
   
-  Serial.print(F("\nHumedity: "));
+  Serial.print(F("\nHumidity: "));
   Serial.print(h);
   Serial.print(F("% "));
   Serial.print(F("Temperature: "));
