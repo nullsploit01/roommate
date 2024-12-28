@@ -42,5 +42,5 @@ void loop()
   Serial.print(hic);
   Serial.print(F("°C"));
 
-  delay(1550);
+  delay(5000);
 }
