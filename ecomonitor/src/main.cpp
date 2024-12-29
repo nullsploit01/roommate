@@ -4,17 +4,19 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <WiFiClient.h>
+#include <DHTReader.h>
 
 // Include the library code
 #include <Configuration.h>
 #include <ConnectWifi.h>
-#include <HumidityTemperatureReader.h>
-#include <ServerHttpClient.h>
+#include <DHTReadingUploader.h>
+
+#define WIFI_INDICATOR D3
 
 void setup()
 {
   Serial.begin(115200);
-  pinMode(D3, OUTPUT);
+  pinMode(WIFI_INDICATOR, OUTPUT);
 
   connectWifi();
   dht.begin();
@@ -22,15 +24,16 @@ void setup()
 
 void loop()
 {
-
   if (isConnected())
   {
-    readDHTValues();
+    digitalWrite(WIFI_INDICATOR, HIGH);
+    readAndSendDHTValuesToServer();
   }
   else
   {
+    digitalWrite(WIFI_INDICATOR, LOW);
     Serial.println("WiFi Disconnected");
   }
 
-  delay(5000);
+  delay(105000);
 }
