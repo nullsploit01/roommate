@@ -1,52 +1,48 @@
-void sendGetRequest(String path)
+String sendGetRequest(String path)
 {
-  if (WiFi.status() == WL_CONNECTED)
-  {
-    HTTPClient http;
-    WiFiClient wifiClient;
-    String fullURL = String(SERVER_API_URL) + path; // Construct the full URL
-    http.begin(wifiClient, fullURL);                // Specify the URL
-    int httpCode = http.GET();                      // Send the request
+  String response = "";
+  HTTPClient http;
+  WiFiClient wifiClient;
+  String fullURL = String(SERVER_API_URL) + path;
 
-    if (httpCode > 0)
-    {
-      Serial.printf("GET Response code: %d\n", httpCode);
-      String payload = http.getString();
-      Serial.println("Response:");
-      Serial.println(payload);
-    }
-    else
-    {
-      Serial.printf("GET request failed, error: %s\n", http.errorToString(httpCode).c_str());
-    }
-    http.end();
+  http.begin(wifiClient, fullURL);
+  int httpCode = http.GET();
+
+  if (httpCode > 0)
+  {
+    Serial.printf("GET Response code: %d\n", httpCode);
+    response = http.getString();
   }
+  else
+  {
+    Serial.printf("GET request failed, error: %s\n", http.errorToString(httpCode).c_str());
+  }
+  http.end();
+
+  return response;
 }
 
-void sendPostRequest(String path, String jsonData)
+String sendPostRequest(String path, String jsonData)
 {
-  if (WiFi.status() == WL_CONNECTED)
+  String response = "";
+  HTTPClient http;
+  WiFiClient wifiClient;
+
+  String fullURL = String(SERVER_API_URL) + path;
+  http.begin(wifiClient, fullURL);
+  http.addHeader("Content-Type", "application/json");
+
+  int httpCode = http.POST(jsonData);
+
+  if (httpCode > 0)
   {
-    HTTPClient http;
-    WiFiClient wifiClient;
-
-    String fullURL = String(SERVER_API_URL) + path;     // Construct the full URL
-    http.begin(wifiClient, fullURL);                    // Specify the URL
-    http.addHeader("Content-Type", "application/json"); // Set content type to JSON
-
-    int httpCode = http.POST(jsonData); // Send the POST request
-
-    if (httpCode > 0)
-    {
-      Serial.printf("POST Response code: %d\n", httpCode);
-      String payload = http.getString();
-      Serial.println("Response:");
-      Serial.println(payload);
-    }
-    else
-    {
-      Serial.printf("POST request failed, error: %s\n", http.errorToString(httpCode).c_str());
-    }
-    http.end();
+    Serial.printf("POST Response code: %d\n", httpCode);
+    response = http.getString();
   }
+  else
+  {
+    Serial.printf("POST request failed, error: %s\n", http.errorToString(httpCode).c_str());
+  }
+  http.end();
+  return response;
 }
