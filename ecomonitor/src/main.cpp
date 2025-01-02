@@ -36,4 +36,8 @@ void loop()
   }
 
   delay(105000);
+
+  digitalWrite(WIFI_INDICATOR, LOW);
+  delay(500);
+  digitalWrite(WIFI_INDICATOR, HIGH);
 }
