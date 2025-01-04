@@ -35,7 +35,7 @@ void loop()
     Serial.println("WiFi Disconnected");
   }
 
-  delay(105000);
+  delay(600000);
 
   digitalWrite(WIFI_INDICATOR, LOW);
   delay(1500);
