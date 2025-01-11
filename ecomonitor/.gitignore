@@ -1,4 +1,0 @@
-.pio
-.vscode
-lib/configuration/*
-!lib/configuration/.keep
