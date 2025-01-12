@@ -1,7 +1,7 @@
 import dht
 import machine
 
-DHT_PIN = 4  
+DHT_PIN = 4  # DHT sensor data pin D2
 
 def read_dht():
     """Reads temperature and humidity from the DHT sensor."""

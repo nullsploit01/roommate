@@ -1,5 +1,7 @@
 import network
 import time
+import machine
+
 from config import WIFI_SSID, WIFI_PASSWORD
 
 WIFI_LED_LIGHT = machine.Pin(0, machine.Pin.OUT) 
