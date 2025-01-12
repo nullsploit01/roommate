@@ -11,13 +11,13 @@ def main():
 
     mqtt_client = MQTTClient()
     mqtt_client.connect()
-
+    send_online_status(mqtt_client)
     last_status_time = time.time()
 
     while True:
         current_time = time.time()
         if current_time - last_status_time >= 120:  # 120 seconds = 2 minutes
-            mqtt_client.publish(f"nodes/{NODE_IDENTIFIER}/status", "online")
+            send_online_status(mqtt_client)
             print(f"Published online status for {NODE_IDENTIFIER}")
             last_status_time = current_time
 
@@ -26,10 +26,11 @@ def main():
         if temperature is not None and humidity is not None:
             print(f"Published DHT data: Temperature={temperature}°C, Humidity={humidity}%")
         
-        time.sleep(2)
+        time.sleep(30)
 
-if __name__ == "__main__":
-    main()
+def send_online_status(mqtt_client):
+    mqtt_client.publish(f"nodes/{NODE_IDENTIFIER}/status", "online")
+    print(f"Published online status for {NODE_IDENTIFIER}")
 
 if __name__ == "__main__":
     main()
