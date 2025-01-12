@@ -13,8 +13,11 @@ def connect_wifi():
 
     print(f"Connecting to Wi-Fi: {WIFI_SSID}...")
     while not wlan.isconnected():
-        time.sleep(1)
+        WIFI_LED_LIGHT.value(1) 
+        time.sleep(0.3)
         print(".", end="")
+        WIFI_LED_LIGHT.value(0) 
+        time.sleep(0.3)
 
     print("\nConnected to Wi-Fi.")
     print("Network Config:", wlan.ifconfig())

@@ -18,7 +18,6 @@ def main():
         current_time = time.time()
         if current_time - last_status_time >= 120:  # 120 seconds = 2 minutes
             send_online_status(mqtt_client)
-            print(f"Published online status for {NODE_IDENTIFIER}")
             last_status_time = current_time
 
 
