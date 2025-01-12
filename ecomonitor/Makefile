@@ -2,7 +2,7 @@
 PORT = /dev/tty.usbserial-0001         # Serial port of your device
 BAUD = 115200               # Baud rate for flashing
 FIRMWARE = ./firmware/esp8266-micropython.bin    # Path to the MicroPython firmware
-PY_FILES = main.py config.py boot.py  # Python files to upload
+PY_FILES = config.py boot.py sensors/dht_reader.py utils/wifi.py main.py  # Python files to upload
 
 # Tool definitions
 ESPT = esptool.py
