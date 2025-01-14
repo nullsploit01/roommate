@@ -39,8 +39,8 @@ def send_dht_data(mqtt_client):
         print("Failed to read DHT data.")
         return
     
-    mqtt_client.publish(f"nodes/{NODE_HUMIDITY_API_KEY}/value", temperature)
-    mqtt_client.publish(f"nodes/{NODE_TEMPERATURE_API_KEY}/value", humidity)
+    mqtt_client.publish(f"nodes/{NODE_HUMIDITY_API_KEY}/value", str(temperature))
+    mqtt_client.publish(f"nodes/{NODE_TEMPERATURE_API_KEY}/value", str(humidity))
 
     print(f"Published DHT data for {NODE_IDENTIFIER}")
 
